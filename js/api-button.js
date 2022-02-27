@@ -3,7 +3,7 @@ const todos = () => {
     .then(res => res.json())
     .then(data => displayTodos(data))
 }
-todos();
+// todos();
 
 // make another to display todos 
 const displayTodos = todos => {
