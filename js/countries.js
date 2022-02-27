@@ -28,6 +28,6 @@ const displayCountries = countries => {
     });
 }
 const loadCountryByName = name => {
-    // fetch('')
-    console.log(name)
+    const urs = `https://restcountries.com/v2/name/${name}`
+    console.log(url);
 }
