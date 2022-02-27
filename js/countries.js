@@ -28,6 +28,18 @@ const displayCountries = countries => {
     });
 }
 const loadCountryByName = name => {
-    const urs = `https://restcountries.com/v2/name/${name}`
-    console.log(url);
+    const url = `https://restcountries.com/v2/name/${name}`
+    // console.log(url);
+    fetch(url)
+    .then(res => res.json())
+    .then(data => displayCountryDetail(data[0]));
+}
+const displayCountryDetail = country => {
+    console.log(country)
+    const countryDiv = document.getElementById('country-detail');
+    countryDiv.innerHTML =`
+        <h2>${country.name}</h2>
+        <p>population:${country.population} </p>
+        <img width="200px" src="${country.flag}">
+    `
 }
