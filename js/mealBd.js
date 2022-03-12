@@ -3,7 +3,7 @@ const searchField = document.getElementById('button-search');
 const searchInput = document.getElementById('search-input');
 searchInput.addEventListener("keypress", function(event) {
     console.log('keypress trigerred', event.key)
-    if (event.key == 'Enter')
+    if (event.key === 'Enter')
         searchField.click();
 });
 
