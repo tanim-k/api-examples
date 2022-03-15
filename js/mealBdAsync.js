@@ -13,15 +13,17 @@ document.getElementById('error-message').style.display = 'none';
 
 const searchFood = async () => {
     const searchInput = document.getElementById('search-input');
+    const mealDetails = document.getElementById('meal-details')
     const searchInputValue = searchInput.value;
     searchInput.value = '';
+    mealDetails.innerHTML=''
     if(searchInputValue == ''){
         // make an error message
         console.log('hi');
         const mealDetails = document.getElementById('meal-details')
         const p = document.createElement('p');
         p.innerHTML =`
-        <p>please enter word or leter<p/>`;
+        <p>please enter word or letter<p/>`;
         mealDetails.appendChild(p); 
     }
     else{
@@ -41,7 +43,10 @@ const displayError = error => {
     // error message section 
     document.getElementById('error-message').style.display = 'block';
 }
+
+
 const displaySearchResult = meals => {
+    document.getElementById('error-message').style.display = 'none';
     const searchResult = document.getElementById('search-result');
     // searchResult.innerHTML = '';
     searchResult.textContent = '';
@@ -66,6 +71,7 @@ const displaySearchResult = meals => {
     });
 }
 const loadMealDetails = async mealId => {
+    
     const url = `
     https://www.themealdb.com/api/json/v1/1/lookup.php?i=${mealId}`;
     const res = await fetch(url);
@@ -77,10 +83,10 @@ const loadMealDetails = async mealId => {
 }
 // display meal details 
 const displayMealDetails = meal => {
+    
     window.scroll(0, 0);
     console.log(meal);
-    const mealDetails = document.getElementById('meal-details')
-    mealDetails.textContent = ''
+    const mealDetails = document.getElementById('meal-details');
     const div = document.createElement('div');
     div.classList.add('card');
     div.innerHTML = `
@@ -91,4 +97,8 @@ const displayMealDetails = meal => {
         <a href="${meal.strYoutube}" class="btn btn-primary">go to youtube link</a>
     </div>`;
     mealDetails.appendChild(div);
+    
+    // clearing error text in ui:::
+    const errorField = document.getElementById('error-message');   
+    errorField.textContent = '';
 }
