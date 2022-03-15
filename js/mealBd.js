@@ -7,7 +7,8 @@ searchInput.addEventListener("keypress", function (event) {
         searchField.click();
     }      
 });
-
+// error message section 
+document.getElementById('error-message').style.display = 'none';
 const searchFood = () => {
     const searchInput = document.getElementById('search-input');
     const searchInputValue = searchInput.value;
@@ -20,8 +21,13 @@ const searchFood = () => {
     const url = `https://www.themealdb.com/api/json/v1/1/search.php?s=${searchInputValue}`
     fetch(url)
         .then(res => res.json())
-        .then(data => displaySearchResult(data.meals));
+        .then(data => displaySearchResult(data.meals))
+        .catch(error => displayError(error));
     }
+}
+const displayError = error => {
+    // error message section 
+    document.getElementById('error-message').style.display = 'block';
 }
 const displaySearchResult = meals => {
     const searchResult = document.getElementById('search-result');
@@ -56,8 +62,11 @@ const loadMealDetails = mealId => {
 }
 // display meal details 
 const displayMealDetails = meal => {
+    // its for click an go to that thing
+    window.scroll(0, 0);
     console.log(meal);
-    const mealDetails = document.getElementById('meal-details')
+    const mealDetails = document.getElementById('meal-details');
+    mealDetails.textContent = '';
     const div = document.createElement('div');
     div.classList.add('card');
     div.innerHTML = `

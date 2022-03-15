@@ -8,6 +8,9 @@ searchInput.addEventListener("keypress", function (event) {
     }      
 });
 
+// error message section 
+document.getElementById('error-message').style.display = 'none';
+
 const searchFood = async () => {
     const searchInput = document.getElementById('search-input');
     const searchInputValue = searchInput.value;
@@ -24,10 +27,19 @@ const searchFood = async () => {
     else{
         // load data 
     const url = `https://www.themealdb.com/api/json/v1/1/search.php?s=${searchInputValue}`;
-    const res = await fetch(url);
-    const data = await res.json()
-    displaySearchResult(data.meals);
+        try{
+            const res = await fetch(url);
+            const data = await res.json()
+            displaySearchResult(data.meals);
+        }
+        catch(error){
+            displayError(error)
+        }
     }
+}
+const displayError = error => {
+    // error message section 
+    document.getElementById('error-message').style.display = 'block';
 }
 const displaySearchResult = meals => {
     const searchResult = document.getElementById('search-result');
